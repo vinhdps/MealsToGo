@@ -1,13 +1,29 @@
 import React from "react";
+import styled from "styled-components/native";
 import { Text, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
+
+const RestaurantCard = styled(Card)`
+  background-color: white;
+`;
+
+const RestaurantCardCover = styled(Card.Cover)`
+  padding: 16px;
+  background-color: white;
+`;
+
+const Title = styled.Text`
+  padding-bottom: 16px;
+  color: black;
+  align-self: center;
+`;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Some Restaurant",
     icon,
     photos = [
-      "https://lh3.googleusercontent.com/proxy/Xg2tP0RAPMRuiex4KHvr6HK1be-u756QETLJnHm0IJ2nRyEh07wyFZH_fnVgr-CU926y7vIDHP9quc9vo01qFHe7VgpUji_4CTPEFQOcr_-9rGw",
+      "https://media-cdn.tripadvisor.com/media/photo-s/1b/67/cc/f8/chestnut-restaurant.jpg",
     ],
     address = "Somewhere",
     isOpenNow = true,
@@ -15,23 +31,9 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isCloseTemporarily,
   } = restaurant;
   return (
-    <Card elevation={5} style={styles.card}>
-      <Card.Cover key={name} style={styles.cover} source={{ uri: photos[0] }} />
-      <Text style={styles.title}>{name}</Text>
-    </Card>
+    <RestaurantCard elevation={5}>
+      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      <Title>{name}</Title>
+    </RestaurantCard>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "white",
-  },
-  cover: {
-    padding: 16,
-    backgroundColor: "white",
-  },
-  title: {
-    textAlign: "center",
-    paddingBottom: 10,
-  },
-});
