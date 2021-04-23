@@ -61,7 +61,6 @@ const Opening = styled(SvgXml)`
   width: ${(props) => props.theme.sizes[4]};
   height: ${(props) => props.theme.sizes[4]};
   margin-right: ${(props) => props.theme.space[4]};
-  margin-top: ${(props) => props.theme.space[3]};
 `;
 
 const Icon = styled(Image)`
