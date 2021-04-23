@@ -52,13 +52,19 @@ const Address = styled(Text)`
   color: ${(props) => props.theme.colors.ui.primary};
 `;
 
-const OpeningIcon = styled(SvgXml)`
-  width: ${(props) => props.theme.sizes[4]};
-  height: ${(props) => props.theme.sizes[4]};
-  padding-right: ${(props) => props.theme.space[6]};
+const Star = styled(SvgXml)`
+  width: ${(props) => props.theme.sizes[1]};
+  height: ${(props) => props.theme.sizes[1]};
 `;
 
-const RestaurantIcon = styled(Image)`
+const Opening = styled(SvgXml)`
+  width: ${(props) => props.theme.sizes[4]};
+  height: ${(props) => props.theme.sizes[4]};
+  margin-right: ${(props) => props.theme.space[4]};
+  margin-top: ${(props) => props.theme.space[3]};
+`;
+
+const Icon = styled(Image)`
   width: ${(props) => props.theme.sizes[2]};
   height: ${(props) => props.theme.sizes[2]};
 `;
@@ -86,14 +92,14 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           <Name>{name}</Name>
           <Rating>
             {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+              <Star xml={star} />
             ))}
           </Rating>
           <Address>{address}</Address>
         </LeftSection>
         <RightSection>
-          {isOpenNow && <OpeningIcon xml={open} />}
-          <RestaurantIcon source={{ uri: icon }} />
+          {isOpenNow && <Opening xml={open} />}
+          <Icon source={{ uri: icon }} />
         </RightSection>
       </CardInfo>
     </RestaurantCard>
