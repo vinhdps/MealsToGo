@@ -81,8 +81,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isCloseTemporarily = false,
   } = restaurant;
 
-  const ratingArray = Array.from(new Array(Math.ceil(rating)));
-  console.log(ratingArray);
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurantCard elevation={5}>
       <CardPicture key={name} source={{ uri: photos[0] }} />
