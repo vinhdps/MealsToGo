@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components/native";
 
 const sizeVariant = {
   s: 1,
-  me: 2,
+  m: 2,
   l: 3,
   xl: 4,
   xxl: 5,
