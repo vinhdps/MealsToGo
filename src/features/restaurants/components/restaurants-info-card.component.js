@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Text, View, Image } from "react-native";
+import { View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
+import { Spacer } from "../../../components/spacer/spacer.components";
+import { Text } from "../../../components/typography/text.components";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
@@ -13,7 +15,7 @@ const RestaurantCard = styled(Card)`
 `;
 
 const CardPicture = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[1]};
+  padding: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
@@ -24,7 +26,7 @@ const CardInfo = styled(View)`
 const LeftSection = styled(View)`
   flex: 1;
   align-items: flex-start;
-  padding-left: ${(props) => props.theme.space[1]};
+  padding-left: ${(props) => props.theme.space[3]};
 `;
 
 const RightSection = styled(View)`
@@ -32,24 +34,12 @@ const RightSection = styled(View)`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding-right: ${(props) => props.theme.space[1]};
+  padding-right: ${(props) => props.theme.space[3]};
 `;
 
 const Rating = styled(View)`
   flex-direction: row;
-  padding-vertical: ${(props) => props.theme.space[1]};
-`;
-
-const Name = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizes.body};
-  font-family: ${(props) => props.theme.fonts.body};
-  color: ${(props) => props.theme.colors.ui.primary};
-`;
-
-const Address = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizes.caption};
-  font-family: ${(props) => props.theme.fonts.body};
-  color: ${(props) => props.theme.colors.ui.primary};
+  padding-vertical: ${(props) => props.theme.space[3]};
 `;
 
 const Star = styled(SvgXml)`
@@ -60,12 +50,11 @@ const Star = styled(SvgXml)`
 const Opening = styled(SvgXml)`
   width: ${(props) => props.theme.sizes[4]};
   height: ${(props) => props.theme.sizes[4]};
-  margin-right: ${(props) => props.theme.space[4]};
 `;
 
 const Icon = styled(Image)`
-  width: ${(props) => props.theme.sizes[2]};
-  height: ${(props) => props.theme.sizes[2]};
+  width: ${(props) => props.theme.sizes[3]};
+  height: ${(props) => props.theme.sizes[3]};
 `;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
@@ -87,17 +76,21 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       <CardPicture key={name} source={{ uri: photos[0] }} />
       <CardInfo>
         <LeftSection>
-          <Name>{name}</Name>
+          <Text variant="label">{name}</Text>
           <Rating>
             {ratingArray.map(() => (
               <Star xml={star} />
             ))}
           </Rating>
-          <Address>{address}</Address>
+          <Text variant="label">{address}</Text>
         </LeftSection>
         <RightSection>
-          {isOpenNow && <Opening xml={open} />}
-          <Icon source={{ uri: icon }} />
+          <Spacer position="right" size="xxxl">
+            {isOpenNow && <Opening xml={open} />}
+          </Spacer>
+          <Spacer position="right" size="l">
+            <Icon source={{ uri: icon }} />
+          </Spacer>
         </RightSection>
       </CardInfo>
     </RestaurantCard>
