@@ -1,6 +1,5 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -12,21 +11,29 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { theme } from "./src/infrastructure/theme/index";
-import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
-import { SafeArea } from "./src/components/utility/safe-area.compononent";
+import { RestaurantsScreen } from "./src/features/restaurants/screen/restaurants.screen";
+import { SettingsScreen } from "./src/features/settings/screen/settings.screen";
+import { MapScreen } from "./src/features/map/screen/map.screen";
+import { restaurantRequest } from "./src/services/restaurants/restaurants.service";
 
 const Tab = createBottomTabNavigator();
 
-const SettingsScreen = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-const MapScreen = () => (
-  <SafeArea>
-    <Text>Map</Text>
-  </SafeArea>
-);
+const TAB_ICON = {
+  Restaurants: "home",
+  Map: "map",
+  Settings: "settings",
+};
+
+const createScreenOptions = ({ route }) => {
+  const tabBarIcon = ({ focused, size, color }) => (
+    <Ionicons
+      name={focused ? TAB_ICON[route.name] : `${TAB_ICON[route.name]}-outline`}
+      size={size}
+      color={color}
+    />
+  );
+  return { tabBarIcon };
+};
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -44,23 +51,10 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === "Home") {
-                  iconName = focused
-                    ? "ios-information-circle"
-                    : "ios-information-circle-outline";
-                } else if (route.name === "Settings") {
-                  iconName = focused ? "ios-list-box" : "ios-list";
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-            })}
+            screenOptions={({ route }) => createScreenOptions({ route })}
             tabBarOptions={{
-              activeTintColor: "tomato",
-              inactiveTintColor: "gray",
+              activeTintColor: theme.colors.ui.selected,
+              inactiveTintColor: theme.colors.ui.notselected,
             }}
           >
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
