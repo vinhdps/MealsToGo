@@ -2,6 +2,7 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
 import { Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
+import { Ionicons } from "@expo/vector-icons";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -42,7 +43,26 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+
+                if (route.name === "Home") {
+                  iconName = focused
+                    ? "ios-information-circle"
+                    : "ios-information-circle-outline";
+                } else if (route.name === "Settings") {
+                  iconName = focused ? "ios-list-box" : "ios-list";
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: "tomato",
+              inactiveTintColor: "gray",
+            }}
+          >
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
