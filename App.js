@@ -14,7 +14,7 @@ import { theme } from "./src/infrastructure/theme/index";
 import { RestaurantsScreen } from "./src/features/restaurants/screen/restaurants.screen";
 import { SettingsScreen } from "./src/features/settings/screen/settings.screen";
 import { MapScreen } from "./src/features/map/screen/map.screen";
-import { restaurantRequest } from "./src/services/restaurants/restaurants.service";
+import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +22,11 @@ const TAB_ICON = {
   Restaurants: "home",
   Map: "map",
   Settings: "settings",
+};
+
+const TAB_ICON_COLOR = {
+  activeTintColor: theme.colors.ui.selected,
+  inactiveTintColor: theme.colors.ui.notselected,
 };
 
 const createScreenOptions = ({ route }) => {
@@ -49,21 +54,20 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => createScreenOptions({ route })}
-            tabBarOptions={{
-              activeTintColor: theme.colors.ui.selected,
-              inactiveTintColor: theme.colors.ui.notselected,
-            }}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
-        <ExpoStatusBar style="auto" />
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => createScreenOptions({ route })}
+              tabBarOptions={TAB_ICON_COLOR}
+            >
+              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantContextProvider>
       </ThemeProvider>
+      <ExpoStatusBar style="auto" />
     </>
   );
 }

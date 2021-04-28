@@ -49,6 +49,6 @@ export const Opening = styled(SvgXml)`
 `;
 
 export const Icon = styled(Image)`
-  width: ${(props) => props.theme.sizes[2]};
-  height: ${(props) => props.theme.sizes[2]};
+  width: ${(props) => props.theme.sizes[1]};
+  height: ${(props) => props.theme.sizes[1]};
 `;

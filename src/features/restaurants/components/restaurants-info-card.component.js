@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   RestaurantCard,
   CardPicture,
@@ -23,7 +22,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     photos = [
       "https://media-cdn.tripadvisor.com/media/photo-s/1b/67/cc/f8/chestnut-restaurant.jpg",
     ],
-    address = "123 Random Street,  Big City,  Vietnam",
+    address = "123 Random Street  Big City  Vietnam",
     isOpenNow = true,
     rating = 5,
     isCloseTemporarily = false,
