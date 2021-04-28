@@ -17,15 +17,14 @@ import open from "../../../../assets/open";
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
-    name = "Some Restaurant",
-    icon = "https://cdn.icon-icons.com/icons2/789/PNG/512/restaurant_icon-icons.com_65336.png",
-    photos = [
-      "https://media-cdn.tripadvisor.com/media/photo-s/1b/67/cc/f8/chestnut-restaurant.jpg",
-    ],
-    address = "123 Random Street  Big City  Vietnam",
-    isOpenNow = true,
-    rating = 5,
-    isCloseTemporarily = false,
+    name,
+    icon,
+    photos,
+    address,
+    isOpenNow,
+    rating,
+    isCloseTemporarily,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -36,8 +35,8 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         <LeftSection>
           <Text variant="label">{name}</Text>
           <Rating>
-            {ratingArray.map(() => (
-              <Star xml={star} />
+            {ratingArray.map((_, index) => (
+              <Star key={`star-${placeId}-${index}`} xml={star} />
             ))}
           </Rating>
           <Text variant="description">{address}</Text>
