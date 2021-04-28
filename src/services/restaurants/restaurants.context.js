@@ -22,7 +22,7 @@ export const RestaurantContextProvider = ({ children }) => {
           setIsLoading(false);
           setError(err);
         });
-    }, 2000);
+    }, 1000);
   };
   useEffect(() => {
     retrieveRestaurant();
