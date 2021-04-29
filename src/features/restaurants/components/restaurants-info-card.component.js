@@ -15,15 +15,17 @@ import { Spacer } from "../../../components/spacer/spacer.components";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
-export const RestaurantInfoCard = ({ restaurant = {} }) => {
+export const RestaurantInfoCard = ({ restaurant }) => {
   const {
-    name,
-    icon,
-    photos,
-    address,
-    isOpenNow,
-    rating,
-    isCloseTemporarily,
+    name = "Some Restaurant",
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    photos = [
+      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
+    ],
+    address = "100 Random Street Hanoi Vietnam",
+    isOpenNow = true,
+    rating = 5,
+    //isClosedTemporarily = true,
     placeId,
   } = restaurant;
 
