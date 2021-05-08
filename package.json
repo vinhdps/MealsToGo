@@ -32,7 +32,21 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@react-native-community/eslint-config": "^2.0.0",
-    "eslint": "^7.24.0"
+    "eslint": "^7.25.0",
+    "prettier": "^2.2.1"
   },
-  "private": true
+  "private": true,
+  "eslintConfig": {
+    "extends": "@react-native-community",
+    "rules": {
+      "quotes": [
+        2,
+        "double",
+        {
+          "avoidEscape": true
+        }
+      ]
+    },
+    "endOfLine": "auto"
+  }
 }
