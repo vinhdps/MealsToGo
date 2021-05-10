@@ -13,6 +13,9 @@ export const LocationRequest = (searchTerm) => {
 
 export const LocationTransform = ({ results }) => {
   const { geometry = {} } = camelize(results)[0];
-  const { lat, lng } = geometry.location;
-  return { lat, lng };
+  const lat = geometry.location.lat;
+  const lng = geometry.location.lng;
+  const northeastLat = geometry.viewport.northeast.lat;
+  const southwestLat = geometry.viewport.southwest.lat;
+  return { lat, lng, northeastLat, southwestLat };
 };

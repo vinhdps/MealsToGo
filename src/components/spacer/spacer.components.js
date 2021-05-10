@@ -11,6 +11,7 @@ const sizeVariant = {
 };
 
 const positionVariant = {
+  all: "margin",
   top: "margin-top",
   left: "margin-left",
   right: "margin-right",
@@ -35,6 +36,6 @@ export const Spacer = ({ position, size, children }) => {
 };
 
 Spacer.defaultProps = {
-  position: "top",
+  position: "all",
   size: "small",
 };
