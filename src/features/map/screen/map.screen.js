@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { TouchableHighlight } from "react-native";
 import styled from "styled-components/native";
 import MapView from "react-native-maps";
 
 import { LocationContext } from "../../../services/location/location.context";
-import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
+import { RestaurantContext } from "../../../services/restaurants/restaurant.context";
 
 import { Search } from "../components/search.component";
 import { MapCallout } from "../components/map-callout.components";
@@ -54,7 +53,7 @@ export const MapScreen = ({ navigation }) => {
                   })
                 }
               >
-                <MapCallout restaurant={restaurant} />
+                <MapCallout isMap restaurant={restaurant} />
               </MapView.Callout>
             </MapView.Marker>
           );

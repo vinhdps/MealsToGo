@@ -12,6 +12,7 @@ import {
 } from "./restaurants-info-card.styles";
 import { Text } from "../../../components/typography/text.components";
 import { Spacer } from "../../../components/spacer/spacer.components";
+import { Favourite } from "../../../components/favourite/favourite.components";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
@@ -32,6 +33,7 @@ export const RestaurantInfoCard = ({ restaurant }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurantCard elevation={5}>
+      <Favourite restaurant={restaurant} />
       <CardPicture key={name} source={{ uri: photos[0] }} />
       <CardInfo>
         <LeftSection>
