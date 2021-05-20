@@ -6,6 +6,7 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
 import { RestaurantInfoCard } from "../components/restaurants-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.compononent";
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { RestaurantContext } from "../../../services/restaurants/restaurant.context";
 import { FavouriteContext } from "../../../services/favourite/favourite.context";
 import { FavouriteBar } from "../../../components/favourite/favourite-bar.components";
@@ -44,19 +45,21 @@ export const RestaurantsScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color={Colors.blue300} />
         </LoadingContainer>
       )}
-      <RestaurantListContainer
-        data={restaurants}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("RestaurantDetail", { restaurant: item })
-            }
-          >
-            <RestaurantInfoCard restaurant={item} />
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.name}
-      />
+      <FadeInView>
+        <RestaurantListContainer
+          data={restaurants}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("RestaurantDetail", { restaurant: item })
+              }
+            >
+              <RestaurantInfoCard restaurant={item} />
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item.name}
+        />
+      </FadeInView>
     </SafeArea>
   );
 };

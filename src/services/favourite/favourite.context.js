@@ -1,28 +1,30 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const FavouriteContext = createContext();
 
 export const FavouriteContextProvider = ({ children }) => {
   const [favourites, setFavourites] = useState([]);
+  const { user } = useContext(AuthenticationContext);
 
-  const saveFavourites = async (value) => {
+  const saveFavourites = async (value, uid) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@favourites", jsonValue);
+      await AsyncStorage.setItem(`@favourites-${uid}`, jsonValue);
     } catch (err) {
-      console.log("error saving", err);
+      console.log("Favourite-error saving", err);
     }
   };
 
-  const loadFavourites = async () => {
+  const loadFavourites = async (uid) => {
     try {
-      const jsonValue = await AsyncStorage.getItem("@favourites");
+      const jsonValue = await AsyncStorage.getItem(`@favourites-${uid}`);
       if (jsonValue !== null) {
         setFavourites(JSON.parse(jsonValue));
       }
     } catch (err) {
-      console.log("error loading", err);
+      console.log("Favourite-error loading", err);
     }
   };
 
@@ -35,12 +37,16 @@ export const FavouriteContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    loadFavourites();
-  }, []);
+    if (user) {
+      loadFavourites(user.uid);
+    }
+  }, [user]);
 
   useEffect(() => {
-    saveFavourites(favourites);
-  }, [favourites]);
+    if (user) {
+      saveFavourites(favourites, user.uid);
+    }
+  }, [favourites, user]);
 
   return (
     <FavouriteContext.Provider
