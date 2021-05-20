@@ -14,6 +14,7 @@ const NoFavouritesArea = styled(SafeArea)`
 
 const FavouriteListContainer = styled.FlatList`
   padding: ${(props) => props.theme.space[4]};
+  background-color: #fff;
 `;
 
 export const FavouritesScreen = ({ navigation }) => {
